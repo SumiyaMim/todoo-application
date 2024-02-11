@@ -1,12 +1,16 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import logo from '../assets/logo.png'
 
 const Navbar = () => {
   return (
     <div className="relative flex gap-5 justify-between items-center py-6 px-8 md:px-10 lg:px-14 max-w-md md:max-w-3xl lg:max-w-7xl mx-auto">
       <div className="flex w-full justify-between items-center">
-        <div className="flex-1 mx-2 text-3xl text-[#5272dd] font-bold">todoo</div>
+        <div className='flex items-center'>
+            <img src={logo} alt="" className='w-7 h-7 mt-1'/>
+            <div className="flex-1 mx-2 text-3xl text-[#5272dd] font-bold">todoo</div>
+        </div>
         <div className="dropdown dropdown-end lg:hidden mt-1.5">
           <label tabIndex={0} className="flex justify-center items-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>          </label>
