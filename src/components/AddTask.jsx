@@ -3,7 +3,7 @@ import React from 'react'
 
 const AddTask = () => {
   return (
-    <div className='py-20 px-8 md:px-10 lg:px-14 max-w-md md:max-w-3xl lg:max-w-7xl mx-auto'>
+    <div className='py-20'>
       <h1 className='text-center font-bold text-2xl mb-6'>Add Task</h1>
       <div className='border p-8 md:p-12 rounded-md border-zinc-300'>
         <input type="text" placeholder="New Task" className="input input-bordered rounded-md w-full outline-none focus:outline-none mb-5" />
@@ -22,7 +22,7 @@ const AddTask = () => {
                 <span className="font-medium">Low</span> 
             </div>
         </div>
-        <button className='w-full bg-[#4568da] text-white p-1.5 rounded-md font-medium'>Add New Task</button>
+        <button className='w-full bg-[#4568da] hover:bg-[#4363cb] text-white p-1.5 rounded-md font-medium'>Add New Task</button>
       </div>
     </div>
   )
