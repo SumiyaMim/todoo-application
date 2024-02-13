@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -7,6 +6,7 @@ const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editedTask, setEditedTask] = useState('');
+  const [completedTask, setCompletedTask] = useState([]);
 
   // get task
   useEffect(() => {
@@ -41,12 +41,27 @@ const TaskList = () => {
     setEditedTask('');
   };
 
-  const handleUpdateTask = (e) => {
-    setEditedTask({ ...editedTask, task: e.target.value });
+  const handleUpdateTask = (id, e) => {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === id) {
+        return { ...task, task: e.target.value };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
   const handleUpdatePriority = (e) => {
     setEditedTask({ ...editedTask, priority: e.target.value });
+  };
+
+  // update status
+  const handleStatus = (id) => {
+    const updatedCompletedTask = completedTask.includes(id)
+      ? completedTask.filter(taskId => taskId !== id)
+      : [...completedTask, id];
+    setCompletedTask(updatedCompletedTask);
   };
 
   return (
@@ -59,7 +74,7 @@ const TaskList = () => {
           <div key={task.id} className='border p-4 rounded-md border-zinc-300 flex justify-between items-center mb-3'>
             {editingTaskId === task.id ? (
               <div className='w-full'>
-                <input type="text" value={editedTask.task} onChange={handleUpdateTask} className="input input-bordered rounded-md w-full outline-none focus:outline-none mb-5" />
+                <input type="text" value={editedTask.task} onChange={(e) => handleUpdateTask(task.id, e)} className="input input-bordered rounded-md w-full outline-none focus:outline-none mb-5" />
                 <div className='flex flex-col md:flex-row md:items-center gap-7 mb-7'>
                   <h2 className='text-zinc-400 font-medium'>Priority Level:</h2>
                   <div className='flex items-center gap-2'>
@@ -80,8 +95,8 @@ const TaskList = () => {
             ) : (
               <>
                 <div className='flex items-center gap-3'>
-                  <input type="checkbox" className="checkbox checkbox-sm border-[#4568da] checked:border-[#4568da] [--chkbg:#4568da] [--chkfg:white]" />
-                  <h1>{task.task}</h1>
+                  <input type="checkbox" className="checkbox checkbox-sm border-[#4568da] checked:border-[#4568da] [--chkbg:#4568da] [--chkfg:white]" checked={completedTask.includes(task.id)} onChange={() => handleStatus(task.id)} />
+                  <h1 style={{ textDecoration: completedTask.includes(task.id) ? 'line-through' : 'none' }}>{task.task}</h1>
                 </div>
                 <div className='flex items-center gap-4'>
                   <h2 className={`font-semibold ${
