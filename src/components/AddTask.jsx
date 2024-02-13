@@ -29,7 +29,7 @@ const AddTask = () => {
       status: "not completed"
     };
 
-    // get an empty array or existing tasks from local storage or
+    // get an empty array or existing tasks from local storage
     const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
     // add the new task to existing tasks
