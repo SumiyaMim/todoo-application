@@ -1,8 +1,16 @@
-# React + Vite
+# Project Description
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+toddo is a simple Todo List application designed for task management. It allows users to effortlessly add, edit, mark as completed, and delete tasks. Tasks are categorized by priority level, making it easy for users to prioritize their work effectively. It is the ideal tool for staying organized and productive.
 
-Currently, two official plugins are available:
+## Features:
+- Add, edit, mark as completed, and delete tasks.
+- Categorize tasks by priority level(low/ medium/ high).
+- Filtering system based on Priority.
+- Counter for total tasks and completed tasks.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technology:
+- React.js
+- Tailwind CSS
+- Daisy UI
+- LocalStorage
+- React Router Dom
