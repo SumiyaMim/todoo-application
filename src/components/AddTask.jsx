@@ -37,10 +37,12 @@ const AddTask = () => {
 
     // update local storage with the new tasks
     localStorage.setItem('tasks', JSON.stringify(existingTasks));
-
+    
     // Clear input fields
     setTask('');
     setPriority('');
+
+    window.location.reload();
   }
 
 
