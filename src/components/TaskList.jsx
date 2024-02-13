@@ -77,7 +77,7 @@ const TaskList = () => {
 
   return (
     <div className='pb-20'>
-      <h1 className='text-center font-bold text-2xl mb-7'>Task List</h1>
+      <h1 className='text-center font-bold text-2xl mb-7 pb-1 px-3 border-2 w-fit mx-auto border-b-[#4568da] border-t-0 border-x-0'>Task List</h1>
       {filteredTasks.length === 0 ? (
         <p className="text-center text-gray-500">No task available</p>
       ) : (
