@@ -1,6 +1,6 @@
 # Project Description
 
-todoo is a simple Todo List application designed for task management. It allows users to effortlessly add, edit, mark as completed, and delete tasks. Tasks are categorized by priority level, making it easy for users to prioritize their work effectively. It is the ideal tool for staying organized and productive.
+todoo is a simple Todo List Application designed for task management. It allows users to effortlessly add, edit, mark as completed, and delete tasks. Tasks are categorized by priority level, making it easy for users to prioritize their work effectively. It is the ideal tool for staying organized and productive.
 
 ## Features:
 - Add, edit, mark as completed, and delete tasks.
