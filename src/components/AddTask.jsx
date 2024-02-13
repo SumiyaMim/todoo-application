@@ -48,7 +48,7 @@ const AddTask = () => {
 
   return (
     <div className='py-20'>
-      <h1 className='text-center font-bold text-2xl mb-6'>Add Task</h1>
+      <h1 className='text-center font-bold text-2xl mb-8 pb-1 px-3 border-2 w-fit mx-auto border-b-[#4568da] border-t-0 border-x-0'>Add Task</h1>
       <div className='border p-8 md:p-12 rounded-md border-zinc-300'>
         <input type="text" placeholder="New Task" className="input input-bordered rounded-md w-full outline-none focus:outline-none mb-5" onChange={handleTask}/>
         <div className='flex flex-col md:flex-row md:items-center gap-7 mb-7'>
