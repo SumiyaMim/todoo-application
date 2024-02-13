@@ -43,15 +43,8 @@ const TaskList = () => {
     setEditedTask('');
   };
 
-  const handleUpdateTask = (id, e) => {
-    const updatedTasks = tasks.map(task => {
-      if (task.id === id) {
-        return { ...task, task: e.target.value };
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  const handleUpdateTask = (e) => {
+    setEditedTask({ ...editedTask, task: e.target.value });
   };
 
   const handleUpdatePriority = (e) => {
@@ -99,7 +92,7 @@ const TaskList = () => {
             <div key={task.id} className='border p-4 rounded-md border-zinc-300 flex justify-between items-center mb-3'>
               {editingTaskId === task.id ? (
                 <div className='w-full'>
-                  <input type="text" value={editedTask.task} onChange={(e) => handleUpdateTask(task.id, e)} className="input input-bordered rounded-md w-full outline-none focus:outline-none mb-5" />
+                <input type="text" value={editedTask.task} onChange={handleUpdateTask} className="input input-bordered rounded-md w-full outline-none focus:outline-none mb-5" />
                   <div className='flex flex-col md:flex-row md:items-center gap-7 mb-7'>
                     <h2 className='text-zinc-400 font-medium'>Priority Level:</h2>
                     <div className='flex items-center gap-2'>
