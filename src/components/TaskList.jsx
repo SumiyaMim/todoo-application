@@ -53,16 +53,27 @@ const TaskList = () => {
 
   // update status
   const handleStatus = (id) => {
-    const updatedTask = tasks.map(task => 
-      task.id === id ? { ...task, status: completedTask.includes(id) ? "not completed" : "completed" } : task
+    const updatedTasks = tasks.map(task => 
+      task.id === id ? { ...task, status: task.status === "completed" ? "not completed" : "completed" } : task
     );
-    setTasks(updatedTask);
-    localStorage.setItem('tasks', JSON.stringify(updatedTask));
-    setCompletedTask(completedTask.includes(id) ? completedTask.filter(taskId => taskId !== id) : [...completedTask, id]);
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    const updatedCompletedTasks = updatedTasks.filter(task => task.status === "completed").map(task => task.id);
+    setCompletedTask(updatedCompletedTasks);
   };
-
+  
+  
   // filter by priority
   const filteredTasks = filterPriority ? tasks.filter(task => task.priority === filterPriority) : tasks;
+
+  // Count total tasks
+  const totalTasks = tasks.length;
+
+  // Count completed tasks
+  useEffect(() => {
+    const completedTasks = tasks.filter(task => task.status === "completed").length;
+    setCompletedTask(completedTasks);
+  }, [tasks]);
 
   return (
     <div className='pb-20'>
@@ -71,25 +82,28 @@ const TaskList = () => {
         <p className="text-center text-gray-500">No task available</p>
       ) : (
         <div>
-          <div className='mb-8 flex justify-end'>
-            <div className="form-control w-full flex flex-row justify-end gap-2">
-              <label className="label">
-                <span className="label-text font-semibold text-zinc-400 uppercase">Filter by</span>
-              </label>
-              <select 
-                className="select bg-zinc-100 focus:border-none outline-none focus:outline-none"
-                value={filterPriority}
-                onChange={(e) => setFilterPriority(e.target.value)}
-              >
-                <option value="">Choose one</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
+          <div className='flex flex-col-reverse md:flex-row justify-between md:items-center gap-3'>
+            <p className="text-gray-500 mb-4">Total tasks: {totalTasks} &nbsp; | &nbsp; Completed tasks: {completedTask}</p>
+            <div className='mb-8 flex justify-end'>
+              <div className="form-control w-full flex flex-row justify-end gap-2">
+                <label className="label">
+                  <span className="label-text font-semibold text-zinc-400 uppercase">Filter by</span>
+                </label>
+                <select 
+                  className="select bg-zinc-100 focus:border-none outline-none focus:outline-none"
+                  value={filterPriority}
+                  onChange={(e) => setFilterPriority(e.target.value)}
+                >
+                  <option value="">Choose one</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </div>
             </div>
-      </div>
+          </div>
           {filteredTasks.map((task) => (
-            <div key={task.id} className='border p-4 rounded-md border-zinc-300 flex justify-between items-center mb-3'>
+            <div key={task.id} className='border p-4 rounded-md border-zinc-300 flex justify-between gap-3 items-center mb-3'>
               {editingTaskId === task.id ? (
                 <div className='w-full'>
                 <input type="text" value={editedTask.task} onChange={handleUpdateTask} className="input input-bordered rounded-md w-full outline-none focus:outline-none mb-5" />
@@ -113,8 +127,8 @@ const TaskList = () => {
               ) : (
                 <>
                   <div className='flex items-center gap-3'>
-                    <input type="checkbox" className="checkbox checkbox-sm border-[#4568da] checked:border-[#4568da] [--chkbg:#4568da] [--chkfg:white]" checked={completedTask.includes(task.id)} onChange={() => handleStatus(task.id)} />
-                    <h1 style={{ textDecoration: completedTask.includes(task.id) ? 'line-through' : 'none' }}>{task.task}</h1>
+                    <input type="checkbox" className="checkbox checkbox-sm border-[#4568da] checked:border-[#4568da] [--chkbg:#4568da] [--chkfg:white]" checked={task.status === "completed"} onChange={() => handleStatus(task.id)} />
+                    <h1 style={{ textDecoration: task.status === "completed" ? 'line-through' : 'none' }}>{task.task}</h1>
                   </div>
                   <div className='flex items-center gap-4'>
                     <h2 className={`font-semibold ${
